@@ -14,9 +14,7 @@ def sendmessage(title, message):
 
 print ('Live Cricket Matches:')
 print ('='*len('Live Cricket Matches:'))
-url = "http://static.cricinfo.com/rss/livescores.xml"
-sc = requests.get(url)
-soup = BeautifulSoup(sc.text,'lxml')
+soup = BeautifulSoup(requests.get("http://static.cricinfo.com/rss/livescores.xml").text,'lxml')
 
 i = 1
 for data in soup.findAll('item'):
@@ -43,14 +41,12 @@ while True:
         sys.exit()
     else:
         break
-url = list_links[user_input - 1]
-sc = requests.get(url)
-soup = BeautifulSoup(sc.text,'lxml')
+
+
+soup = BeautifulSoup(requests.get(list_links[user_input - 1]).text,'lxml')
 
 while True:
-    url = list_links[user_input - 1]
-    sc = requests.get(url)
-    soup = BeautifulSoup(sc.text,'lxml')
+    soup = BeautifulSoup(requests.get(list_links[user_input - 1]).text,'lxml')
     score = soup.findAll('title')
     try:
         sc.raise_for_status()
